@@ -1,6 +1,8 @@
 import time
 from functools import lru_cache
 
+fibonacci_3_counter = 0
+
 # Fibonacci function with lru_cache
 @lru_cache(maxsize=None)  # Unlimited cache
 def fibonacci_with_cache(n):
@@ -10,6 +12,9 @@ def fibonacci_with_cache(n):
 
 # Fibonacci function without lru_cache
 def fibonacci_without_cache(n):
+    global fibonacci_3_counter
+    if n == 3:
+        fibonacci_3_counter += 1  # Increment the counter when n == 3
     if n < 2:
         return n
     return fibonacci_without_cache(n-1) + fibonacci_without_cache(n-2)
@@ -45,3 +50,4 @@ def compare_fibonacci(n):
 if __name__ == "__main__":
     n = int(input("Enter the Fibonacci number to calculate: "))
     compare_fibonacci(n)
+    print(f"fibonacci(3) was calculated {fibonacci_3_counter} times.")
